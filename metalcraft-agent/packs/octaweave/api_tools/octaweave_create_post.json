@@ -1,0 +1,54 @@
+{
+  "name": "octaweave_create_post",
+  "description": "Create a blog post. It starts as a DRAFT \u2014 nothing is public until octaweave_publish_post. `body` is markdown. `cover_url` and any images in the body should be public drive URLs from octaweave_share_file.",
+  "method": "POST",
+  "url": "https://octaweave.com/api/v1/w/{workspace}/posts",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY",
+    "Content-Type": "application/json"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "Workspace slug or uuid. An API key is pinned to ONE workspace \u2014 call octaweave_whoami and use actor.workspace_id. A wrong workspace is a 403, not a 404."
+      },
+      "title": {
+        "type": "string",
+        "description": "Post title."
+      },
+      "body": {
+        "type": "string",
+        "description": "Markdown body."
+      },
+      "excerpt": {
+        "type": "string",
+        "description": "Optional excerpt; derived from the body when omitted."
+      },
+      "slug": {
+        "type": "string",
+        "description": "Optional slug."
+      },
+      "labels": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Label names."
+      },
+      "cover_url": {
+        "type": "string",
+        "description": "Optional cover image URL (a shared drive link)."
+      },
+      "canonical_url": {
+        "type": "string",
+        "description": "Optional canonical URL if this is republished from elsewhere."
+      }
+    },
+    "required": [
+      "workspace"
+    ]
+  },
+  "body_mapping": "params"
+}

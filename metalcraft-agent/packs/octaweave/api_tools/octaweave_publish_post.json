@@ -1,0 +1,32 @@
+{
+  "name": "octaweave_publish_post",
+  "description": "PUBLISH A POST TO THE INTERNET. `at` in the future SCHEDULES it, `at` in the past BACKDATES it, and omitting `at` publishes now. This makes the post readable by anyone \u2014 confirm with the user before calling it, and check octaweave_get_post's `media` array first so you do not publish broken images.",
+  "method": "POST",
+  "url": "https://octaweave.com/api/v1/w/{workspace}/posts/{post}/publish",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY",
+    "Content-Type": "application/json"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "Workspace slug or uuid. An API key is pinned to ONE workspace \u2014 call octaweave_whoami and use actor.workspace_id. A wrong workspace is a 403, not a 404."
+      },
+      "post": {
+        "type": "string",
+        "description": "Post id or slug."
+      },
+      "at": {
+        "type": "string",
+        "description": "Optional RFC-3339 time. Future = schedule, past = backdate, omitted = now."
+      }
+    },
+    "required": [
+      "workspace",
+      "post"
+    ]
+  },
+  "body_mapping": "params"
+}

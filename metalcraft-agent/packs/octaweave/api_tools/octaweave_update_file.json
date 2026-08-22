@@ -1,0 +1,40 @@
+{
+  "name": "octaweave_update_file",
+  "description": "Rename a file, move it to another folder, or trash/untrash it. Trashing ({trashed: true}) is REVERSIBLE and is what you should reach for instead of deleting \u2014 deletion is permanent and a file that a published post displays takes the post's images down with it.",
+  "method": "PATCH",
+  "url": "https://octaweave.com/api/v1/w/{workspace}/files/{file_id}",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY",
+    "Content-Type": "application/json"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "Workspace slug or uuid. An API key is pinned to ONE workspace \u2014 call octaweave_whoami and use actor.workspace_id. A wrong workspace is a 403, not a 404."
+      },
+      "file_id": {
+        "type": "string",
+        "description": "File id."
+      },
+      "name": {
+        "type": "string",
+        "description": "New file name."
+      },
+      "folder": {
+        "type": "string",
+        "description": "Destination folder id."
+      },
+      "trashed": {
+        "type": "boolean",
+        "description": "true moves it to the trash, false restores it."
+      }
+    },
+    "required": [
+      "workspace",
+      "file_id"
+    ]
+  },
+  "body_mapping": "params"
+}

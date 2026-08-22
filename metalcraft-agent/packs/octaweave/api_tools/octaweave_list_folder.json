@@ -1,0 +1,27 @@
+{
+  "name": "octaweave_list_folder",
+  "description": "List a drive folder's contents. Pass the literal string 'root' as `folder` for the top level. Returns {folders, files}. Each file carries size_bytes, content_type, `shared` (whether a public link exists \u2014 not what it is), and `used_by` (posts that display it).",
+  "method": "GET",
+  "url": "https://octaweave.com/api/v1/w/{workspace}/folders/{folder}/contents",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "Workspace slug or uuid. An API key is pinned to ONE workspace \u2014 call octaweave_whoami and use actor.workspace_id. A wrong workspace is a 403, not a 404."
+      },
+      "folder": {
+        "type": "string",
+        "description": "Folder id, or the literal 'root' for the top level."
+      }
+    },
+    "required": [
+      "workspace",
+      "folder"
+    ]
+  },
+  "body_mapping": "none"
+}

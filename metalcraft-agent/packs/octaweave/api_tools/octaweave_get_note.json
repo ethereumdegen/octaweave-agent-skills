@@ -1,0 +1,27 @@
+{
+  "name": "octaweave_get_note",
+  "description": "Fetch one note by id OR slug. Returns the summary fields plus `body` (markdown \u2014 the source of truth), `html` (server-rendered, sanitized; for display only), `backlinks` (notes linking here), and `broken_links` (slugs this note links to that do not exist yet). KEEP THE `version` \u2014 you must send it as base_version when you edit.",
+  "method": "GET",
+  "url": "https://octaweave.com/api/v1/w/{workspace}/notes/{note}",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "Workspace slug or uuid. An API key is pinned to ONE workspace \u2014 call octaweave_whoami and use actor.workspace_id. A wrong workspace is a 403, not a 404."
+      },
+      "note": {
+        "type": "string",
+        "description": "Note id or slug."
+      }
+    },
+    "required": [
+      "workspace",
+      "note"
+    ]
+  },
+  "body_mapping": "none"
+}

@@ -1,0 +1,35 @@
+{
+  "name": "octaweave_search",
+  "description": "Full-text search across the whole workspace \u2014 notes, posts, cards, events, and file names. Returns {items}. Prefer this over listing a module and filtering yourself. Narrow with `type` when you know what kind of thing you want.",
+  "method": "GET",
+  "url": "https://octaweave.com/api/v1/w/{workspace}/search?q={q}&type={type}&limit={limit}",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "Workspace slug or uuid. An API key is pinned to ONE workspace \u2014 call octaweave_whoami and use actor.workspace_id. A wrong workspace is a 403, not a 404."
+      },
+      "q": {
+        "type": "string",
+        "description": "The search query."
+      },
+      "type": {
+        "type": "string",
+        "description": "Optional: note | post | card | event | file. Omit to search everything."
+      },
+      "limit": {
+        "type": "integer",
+        "description": "Max hits. Default 20."
+      }
+    },
+    "required": [
+      "workspace",
+      "q"
+    ]
+  },
+  "body_mapping": "none"
+}

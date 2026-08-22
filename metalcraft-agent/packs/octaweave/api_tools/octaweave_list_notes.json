@@ -1,0 +1,38 @@
+{
+  "name": "octaweave_list_notes",
+  "description": "List notes in the workspace, newest-updated first. Returns {items, next_cursor}; pass next_cursor back as `cursor` for the next page (null means last page). Each item has id, title, slug, version, updated_at, is_favorite, labels \u2014 not the body. Use octaweave_get_note for content, or octaweave_search when you know roughly what you are looking for.",
+  "method": "GET",
+  "url": "https://octaweave.com/api/v1/w/{workspace}/notes?label={label}&sort={sort}&limit={limit}&cursor={cursor}",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "Workspace slug or uuid. An API key is pinned to ONE workspace \u2014 call octaweave_whoami and use actor.workspace_id. A wrong workspace is a 403, not a 404."
+      },
+      "label": {
+        "type": "string",
+        "description": "Optional label name to filter by."
+      },
+      "sort": {
+        "type": "string",
+        "description": "'updated' (default) or 'accessed'."
+      },
+      "limit": {
+        "type": "integer",
+        "description": "Page size. Default 50."
+      },
+      "cursor": {
+        "type": "string",
+        "description": "Opaque cursor from a previous call's next_cursor."
+      }
+    },
+    "required": [
+      "workspace"
+    ]
+  },
+  "body_mapping": "none"
+}

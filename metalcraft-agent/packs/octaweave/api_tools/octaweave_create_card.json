@@ -1,0 +1,57 @@
+{
+  "name": "octaweave_create_card",
+  "description": "Add a card to a board column. `column` is a column id or its name. `after` places the card directly below that card id \u2014 omit it to append to the bottom. `labels` are names and unknown ones are created. `due_at` is RFC-3339.",
+  "method": "POST",
+  "url": "https://octaweave.com/api/v1/w/{workspace}/boards/{board}/cards",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY",
+    "Content-Type": "application/json"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "Workspace slug or uuid. An API key is pinned to ONE workspace \u2014 call octaweave_whoami and use actor.workspace_id. A wrong workspace is a 403, not a 404."
+      },
+      "board": {
+        "type": "string",
+        "description": "Board id or slug."
+      },
+      "column": {
+        "type": "string",
+        "description": "Column id or column name."
+      },
+      "title": {
+        "type": "string",
+        "description": "Card title."
+      },
+      "body": {
+        "type": "string",
+        "description": "Optional markdown body."
+      },
+      "after": {
+        "type": "string",
+        "description": "Optional card id to insert below; omit to append."
+      },
+      "labels": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Label names."
+      },
+      "due_at": {
+        "type": "string",
+        "description": "Optional RFC-3339 due date."
+      }
+    },
+    "required": [
+      "workspace",
+      "board",
+      "column",
+      "title"
+    ]
+  },
+  "body_mapping": "params"
+}

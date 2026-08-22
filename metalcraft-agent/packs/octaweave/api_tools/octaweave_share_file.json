@@ -1,0 +1,28 @@
+{
+  "name": "octaweave_share_file",
+  "description": "Mint a public link for a file and return {url, inline}. THE URL IS RETURNED ONCE AND IS UNRECOVERABLE \u2014 only a hash is stored, so afterwards the API will only say `shared: true`. Save it immediately into whatever you are writing. `inline: false` means the file downloads rather than renders (PDFs, zips, and SVG always do), so do not build an <img src> around it.",
+  "method": "POST",
+  "url": "https://octaweave.com/api/v1/w/{workspace}/files/{file_id}/share",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY",
+    "Content-Type": "application/json"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "Workspace slug or uuid. An API key is pinned to ONE workspace \u2014 call octaweave_whoami and use actor.workspace_id. A wrong workspace is a 403, not a 404."
+      },
+      "file_id": {
+        "type": "string",
+        "description": "File id."
+      }
+    },
+    "required": [
+      "workspace",
+      "file_id"
+    ]
+  },
+  "body_mapping": "params"
+}

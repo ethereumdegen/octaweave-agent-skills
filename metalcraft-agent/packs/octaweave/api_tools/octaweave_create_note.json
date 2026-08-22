@@ -1,0 +1,42 @@
+{
+  "name": "octaweave_create_note",
+  "description": "Create a note. `body` is markdown and is the source of truth; `[[slug]]` inside it links to another note and the server tracks the backlink automatically. `labels` are label NAMES \u2014 passing one that does not exist creates it. Omit `slug` to derive it from the title. Returns {id, slug, version}.",
+  "method": "POST",
+  "url": "https://octaweave.com/api/v1/w/{workspace}/notes",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY",
+    "Content-Type": "application/json"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "Workspace slug or uuid. An API key is pinned to ONE workspace \u2014 call octaweave_whoami and use actor.workspace_id. A wrong workspace is a 403, not a 404."
+      },
+      "title": {
+        "type": "string",
+        "description": "Note title."
+      },
+      "body": {
+        "type": "string",
+        "description": "Markdown body. Use [[other-note-slug]] to link to sibling notes."
+      },
+      "slug": {
+        "type": "string",
+        "description": "Optional URL slug; derived from the title when omitted."
+      },
+      "labels": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Label names. Unknown names are created."
+      }
+    },
+    "required": [
+      "workspace"
+    ]
+  },
+  "body_mapping": "params"
+}

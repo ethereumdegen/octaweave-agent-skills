@@ -1,0 +1,51 @@
+{
+  "name": "octaweave_update_note",
+  "description": "Edit a note. ALWAYS pass `base_version` \u2014 the version you got from octaweave_get_note. If someone edited in between, the write is rejected with 409 stale_write and the response carries the current note under `current`; merge against that and retry with its version. Omitting base_version is last-write-wins and will silently destroy a human's edit. Only the fields you pass are changed.",
+  "method": "PATCH",
+  "url": "https://octaweave.com/api/v1/w/{workspace}/notes/{note}",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY",
+    "Content-Type": "application/json"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "Workspace slug or uuid. An API key is pinned to ONE workspace \u2014 call octaweave_whoami and use actor.workspace_id. A wrong workspace is a 403, not a 404."
+      },
+      "note": {
+        "type": "string",
+        "description": "Note id or slug."
+      },
+      "base_version": {
+        "type": "integer",
+        "description": "The `version` you read. Required in practice \u2014 see the description."
+      },
+      "title": {
+        "type": "string",
+        "description": "New title."
+      },
+      "body": {
+        "type": "string",
+        "description": "New markdown body (replaces the whole body)."
+      },
+      "slug": {
+        "type": "string",
+        "description": "New slug."
+      },
+      "labels": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Replacement label names."
+      }
+    },
+    "required": [
+      "workspace",
+      "note"
+    ]
+  },
+  "body_mapping": "params"
+}

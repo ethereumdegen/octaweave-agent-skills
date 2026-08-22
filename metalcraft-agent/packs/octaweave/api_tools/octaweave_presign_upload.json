@@ -1,0 +1,41 @@
+{
+  "name": "octaweave_presign_upload",
+  "description": "STEP 1 OF 3 for uploading a file. Returns {upload_id, url, expires_in}. The bytes do NOT go through this tool: you must then PUT the file to `url` yourself with the `bash` tool \u2014 `curl -X PUT --upload-file <path> -H 'content-type: <type>' \"<url>\"` \u2014 with no credentials, because the URL is already signed and points at object storage rather than Octaweave. Finally call octaweave_confirm_upload. The URL is valid for 30 minutes. `size` must be the real byte size.",
+  "method": "POST",
+  "url": "https://octaweave.com/api/v1/w/{workspace}/files/presign",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY",
+    "Content-Type": "application/json"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "Workspace slug or uuid. An API key is pinned to ONE workspace \u2014 call octaweave_whoami and use actor.workspace_id. A wrong workspace is a 403, not a 404."
+      },
+      "name": {
+        "type": "string",
+        "description": "File name as it should appear in the drive."
+      },
+      "size": {
+        "type": "integer",
+        "description": "Exact size of the file in bytes."
+      },
+      "content_type": {
+        "type": "string",
+        "description": "MIME type, e.g. 'image/png'. Must match the PUT's content-type header."
+      },
+      "folder": {
+        "type": "string",
+        "description": "Optional destination folder id; omit for the root."
+      }
+    },
+    "required": [
+      "workspace",
+      "name",
+      "size"
+    ]
+  },
+  "body_mapping": "params"
+}

@@ -1,0 +1,28 @@
+{
+  "name": "octaweave_confirm_upload",
+  "description": "STEP 3 OF 3 for uploading a file: turns the uploaded object into a real file row. Call it only after the PUT succeeded. Until you confirm, the object exists but the file does not \u2014 an abandoned upload expires on its own, so a failed PUT needs no cleanup. Returns the file, including its id.",
+  "method": "POST",
+  "url": "https://octaweave.com/api/v1/w/{workspace}/files/confirm",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY",
+    "Content-Type": "application/json"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "Workspace slug or uuid. An API key is pinned to ONE workspace \u2014 call octaweave_whoami and use actor.workspace_id. A wrong workspace is a 403, not a 404."
+      },
+      "upload_id": {
+        "type": "string",
+        "description": "The upload_id from octaweave_presign_upload."
+      }
+    },
+    "required": [
+      "workspace",
+      "upload_id"
+    ]
+  },
+  "body_mapping": "params"
+}

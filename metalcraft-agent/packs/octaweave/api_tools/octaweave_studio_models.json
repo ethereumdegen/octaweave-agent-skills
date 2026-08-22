@@ -1,0 +1,22 @@
+{
+  "name": "octaweave_studio_models",
+  "description": "List the image models this deployment offers, with `credits_per_image`, `max_images`, and the `sizes` each accepts, plus the organization's `available_credits` and whether Studio is `configured`. CALL THIS BEFORE GENERATING: prices live in the server, not in config, and this is the only place to learn the current cost and the remaining balance.",
+  "method": "GET",
+  "url": "https://octaweave.com/api/v1/w/{workspace}/studio/models",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "Workspace slug or uuid. An API key is pinned to ONE workspace \u2014 call octaweave_whoami and use actor.workspace_id. A wrong workspace is a 403, not a 404."
+      }
+    },
+    "required": [
+      "workspace"
+    ]
+  },
+  "body_mapping": "none"
+}

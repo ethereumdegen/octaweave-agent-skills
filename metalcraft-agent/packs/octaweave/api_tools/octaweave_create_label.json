@@ -1,0 +1,32 @@
+{
+  "name": "octaweave_create_label",
+  "description": "Create a label. You usually do NOT need this \u2014 passing a new name in `labels` when creating a note or a card creates it. Use this only to set a specific colour up front.",
+  "method": "POST",
+  "url": "https://octaweave.com/api/v1/w/{workspace}/labels",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY",
+    "Content-Type": "application/json"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "Workspace slug or uuid. An API key is pinned to ONE workspace \u2014 call octaweave_whoami and use actor.workspace_id. A wrong workspace is a 403, not a 404."
+      },
+      "name": {
+        "type": "string",
+        "description": "Label name."
+      },
+      "color": {
+        "type": "string",
+        "description": "Optional hex colour, e.g. '#e2725b'."
+      }
+    },
+    "required": [
+      "workspace",
+      "name"
+    ]
+  },
+  "body_mapping": "params"
+}

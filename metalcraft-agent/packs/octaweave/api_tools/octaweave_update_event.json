@@ -1,0 +1,64 @@
+{
+  "name": "octaweave_update_event",
+  "description": "Edit an event. FOR A REPEATING EVENT YOU MUST CHOOSE A SCOPE: scope='this' (the default) edits the single occurrence named by `recurrence_id`, splitting it out as an override; scope='all' edits the whole series. These are different operations and guessing is how people lose meetings \u2014 ask the user which they mean if it is not obvious. Pass `base_version` from the event you read.",
+  "method": "PATCH",
+  "url": "https://octaweave.com/api/v1/w/{workspace}/events/{event_id}?scope={scope}",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY",
+    "Content-Type": "application/json"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "Workspace slug or uuid. An API key is pinned to ONE workspace \u2014 call octaweave_whoami and use actor.workspace_id. A wrong workspace is a 403, not a 404."
+      },
+      "event_id": {
+        "type": "string",
+        "description": "Event id."
+      },
+      "scope": {
+        "type": "string",
+        "description": "'this' (default, one occurrence) or 'all' (the whole series)."
+      },
+      "recurrence_id": {
+        "type": "string",
+        "description": "Which occurrence you are editing, for a repeating series."
+      },
+      "base_version": {
+        "type": "integer",
+        "description": "The event's `version`."
+      },
+      "title": {
+        "type": "string",
+        "description": "New title."
+      },
+      "description": {
+        "type": "string",
+        "description": "New description."
+      },
+      "location": {
+        "type": "string",
+        "description": "New location."
+      },
+      "starts_at": {
+        "type": "string",
+        "description": "New start, RFC-3339."
+      },
+      "ends_at": {
+        "type": "string",
+        "description": "New end, RFC-3339."
+      },
+      "rrule": {
+        "type": "string",
+        "description": "New recurrence rule."
+      }
+    },
+    "required": [
+      "workspace",
+      "event_id"
+    ]
+  },
+  "body_mapping": "params"
+}

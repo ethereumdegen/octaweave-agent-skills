@@ -1,0 +1,38 @@
+{
+  "name": "octaweave_list_posts",
+  "description": "List blog posts. Returns {items, next_cursor}. Each item has both `status` (what was set) and `visibility` (what a reader actually gets: draft | scheduled | live | archived) \u2014 read `visibility` when you want to know whether anyone can see it. `public_url` is null until something is published.",
+  "method": "GET",
+  "url": "https://octaweave.com/api/v1/w/{workspace}/posts?status={status}&label={label}&limit={limit}&cursor={cursor}",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "Workspace slug or uuid. An API key is pinned to ONE workspace \u2014 call octaweave_whoami and use actor.workspace_id. A wrong workspace is a 403, not a 404."
+      },
+      "status": {
+        "type": "string",
+        "description": "Optional: draft | scheduled | published | archived."
+      },
+      "label": {
+        "type": "string",
+        "description": "Optional label name."
+      },
+      "limit": {
+        "type": "integer",
+        "description": "Page size."
+      },
+      "cursor": {
+        "type": "string",
+        "description": "Cursor from a previous next_cursor."
+      }
+    },
+    "required": [
+      "workspace"
+    ]
+  },
+  "body_mapping": "none"
+}

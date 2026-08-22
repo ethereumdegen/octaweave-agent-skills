@@ -1,0 +1,63 @@
+{
+  "name": "octaweave_update_post",
+  "description": "Edit a post. Pass `base_version` from octaweave_get_post; a mismatch returns 409 stale_write with the current post under `current`, which you should merge against rather than overwrite. Editing a live post changes what readers see immediately.",
+  "method": "PATCH",
+  "url": "https://octaweave.com/api/v1/w/{workspace}/posts/{post}",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY",
+    "Content-Type": "application/json"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "Workspace slug or uuid. An API key is pinned to ONE workspace \u2014 call octaweave_whoami and use actor.workspace_id. A wrong workspace is a 403, not a 404."
+      },
+      "post": {
+        "type": "string",
+        "description": "Post id or slug."
+      },
+      "base_version": {
+        "type": "integer",
+        "description": "The post's `version`."
+      },
+      "title": {
+        "type": "string",
+        "description": "New title."
+      },
+      "body": {
+        "type": "string",
+        "description": "New markdown body."
+      },
+      "excerpt": {
+        "type": "string",
+        "description": "New excerpt."
+      },
+      "slug": {
+        "type": "string",
+        "description": "New slug."
+      },
+      "labels": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Replacement label names."
+      },
+      "cover_url": {
+        "type": "string",
+        "description": "New cover image URL."
+      },
+      "canonical_url": {
+        "type": "string",
+        "description": "New canonical URL."
+      }
+    },
+    "required": [
+      "workspace",
+      "post"
+    ]
+  },
+  "body_mapping": "params"
+}

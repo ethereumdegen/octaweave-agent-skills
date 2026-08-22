@@ -1,0 +1,66 @@
+{
+  "name": "octaweave_update_card",
+  "description": "Edit, move, or complete a card. Moving between columns is {column: 'Done'}; completing is {completed: true}. POSITION IS RELATIVE, NEVER AN INDEX: `after` absent means do not move, `after` null means move to the top of the column, and `after` set to a card id drops it directly below that card. `base_version` is checked for title/body edits only, so a move never conflicts with an edit \u2014 but pass it whenever you change text.",
+  "method": "PATCH",
+  "url": "https://octaweave.com/api/v1/w/{workspace}/cards/{card_id}",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY",
+    "Content-Type": "application/json"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "Workspace slug or uuid. An API key is pinned to ONE workspace \u2014 call octaweave_whoami and use actor.workspace_id. A wrong workspace is a 403, not a 404."
+      },
+      "card_id": {
+        "type": "string",
+        "description": "Card id (from octaweave_get_board)."
+      },
+      "base_version": {
+        "type": "integer",
+        "description": "The card's `version`; required when changing title or body."
+      },
+      "title": {
+        "type": "string",
+        "description": "New title."
+      },
+      "body": {
+        "type": "string",
+        "description": "New markdown body."
+      },
+      "column": {
+        "type": "string",
+        "description": "Move to this column id or name."
+      },
+      "after": {
+        "type": "string",
+        "description": "Reposition: null = top of the column, a card id = directly below it. Omit to leave in place."
+      },
+      "completed": {
+        "type": "boolean",
+        "description": "true completes the card and stamps completed_at; false reopens it."
+      },
+      "labels": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Replacement label names."
+      },
+      "assignees": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Replacement assignee user ids."
+      }
+    },
+    "required": [
+      "workspace",
+      "card_id"
+    ]
+  },
+  "body_mapping": "params"
+}

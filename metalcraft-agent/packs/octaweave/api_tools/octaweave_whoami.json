@@ -1,0 +1,15 @@
+{
+  "name": "octaweave_whoami",
+  "description": "Identify the API key: returns {user, actor:{type,label,workspace_id}, scopes, is_admin}. CALL THIS FIRST in any Octaweave session \u2014 a key is pinned to exactly one workspace and actor.workspace_id is the only reliable way to learn which. Every other tool needs it as `workspace`. It is also the cheapest proof the key works.",
+  "method": "GET",
+  "url": "https://octaweave.com/api/v1/whoami",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+  },
+  "body_mapping": "none"
+}

@@ -1,0 +1,27 @@
+{
+  "name": "octaweave_get_board",
+  "description": "Fetch one board by id or slug, with every column and the cards inside it in order. This is how you find a card id and its current `version` before editing, and how you learn the column names octaweave_create_card expects.",
+  "method": "GET",
+  "url": "https://octaweave.com/api/v1/w/{workspace}/boards/{board}",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "Workspace slug or uuid. An API key is pinned to ONE workspace \u2014 call octaweave_whoami and use actor.workspace_id. A wrong workspace is a 403, not a 404."
+      },
+      "board": {
+        "type": "string",
+        "description": "Board id or slug."
+      }
+    },
+    "required": [
+      "workspace",
+      "board"
+    ]
+  },
+  "body_mapping": "none"
+}

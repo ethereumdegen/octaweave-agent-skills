@@ -1,0 +1,27 @@
+{
+  "name": "octaweave_delete_note",
+  "description": "Permanently delete a note. Not reversible and not a trash operation \u2014 there is no undo. Confirm with the user before calling this on anything you did not create in this session.",
+  "method": "DELETE",
+  "url": "https://octaweave.com/api/v1/w/{workspace}/notes/{note}",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "Workspace slug or uuid. An API key is pinned to ONE workspace \u2014 call octaweave_whoami and use actor.workspace_id. A wrong workspace is a 403, not a 404."
+      },
+      "note": {
+        "type": "string",
+        "description": "Note id or slug."
+      }
+    },
+    "required": [
+      "workspace",
+      "note"
+    ]
+  },
+  "body_mapping": "none"
+}

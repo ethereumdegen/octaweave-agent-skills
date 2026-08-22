@@ -1,0 +1,9 @@
+{
+  "id": "octaweave",
+  "name": "Octaweave",
+  "description": "Persona, skill, and HTTP API tools that let an agent work inside an Octaweave workspace (octaweave.com) — read and write markdown notes with [[wiki-links]] and backlinks, search the whole workspace, move and complete kanban cards, create and edit calendar events including recurring series, upload and share drive files, draft and publish blog posts, and generate images with Studio. Authenticated by a single OCTAWEAVE_API_KEY (an owk_ workspace key from the Keys page), which is pinned to exactly one workspace.",
+  "version": "1.0.0",
+  "requires_env": [
+    "OCTAWEAVE_API_KEY"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "octaweave_get_post",
+  "description": "Fetch one post by id or slug: markdown `body`, rendered `html`, `version`, and `media` \u2014 the drive files the post displays together with whether a logged-out reader can actually see each one. CHECK `media` BEFORE PUBLISHING anything with images: a broken image is invisible to the author, who is signed in, and only 404s for readers.",
+  "method": "GET",
+  "url": "https://octaweave.com/api/v1/w/{workspace}/posts/{post}",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "Workspace slug or uuid. An API key is pinned to ONE workspace \u2014 call octaweave_whoami and use actor.workspace_id. A wrong workspace is a 403, not a 404."
+      },
+      "post": {
+        "type": "string",
+        "description": "Post id or slug."
+      }
+    },
+    "required": [
+      "workspace",
+      "post"
+    ]
+  },
+  "body_mapping": "none"
+}

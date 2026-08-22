@@ -1,0 +1,42 @@
+{
+  "name": "octaweave_create_board",
+  "description": "Create a kanban board. Omit `columns` for the usual three (To do / Doing / Done); pass an empty array for a board with no columns.",
+  "method": "POST",
+  "url": "https://octaweave.com/api/v1/w/{workspace}/boards",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY",
+    "Content-Type": "application/json"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "Workspace slug or uuid. An API key is pinned to ONE workspace \u2014 call octaweave_whoami and use actor.workspace_id. A wrong workspace is a 403, not a 404."
+      },
+      "name": {
+        "type": "string",
+        "description": "Board name."
+      },
+      "slug": {
+        "type": "string",
+        "description": "Optional slug."
+      },
+      "description": {
+        "type": "string",
+        "description": "Optional description."
+      },
+      "columns": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Column names to seed. Omit for the default three; [] for none."
+      }
+    },
+    "required": [
+      "workspace"
+    ]
+  },
+  "body_mapping": "params"
+}

@@ -1,0 +1,27 @@
+{
+  "name": "octaweave_get_generation",
+  "description": "Poll one generation by id. Keep polling until `status` is no longer 'running'. On success the resulting images are in the workspace drive.",
+  "method": "GET",
+  "url": "https://octaweave.com/api/v1/w/{workspace}/studio/generations/{generation_id}",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "Workspace slug or uuid. An API key is pinned to ONE workspace \u2014 call octaweave_whoami and use actor.workspace_id. A wrong workspace is a 403, not a 404."
+      },
+      "generation_id": {
+        "type": "string",
+        "description": "Generation id from octaweave_create_generation."
+      }
+    },
+    "required": [
+      "workspace",
+      "generation_id"
+    ]
+  },
+  "body_mapping": "none"
+}

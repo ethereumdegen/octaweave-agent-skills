@@ -1,0 +1,34 @@
+{
+  "name": "octaweave_list_events",
+  "description": "List events in a time window. `from`/`to` are RFC-3339. Recurring series are EXPANDED across the window, so an item you get back may not be a stored row: it carries series_id, recurrence_id, and is_override. Use the recurrence_id when editing one occurrence of a series.",
+  "method": "GET",
+  "url": "https://octaweave.com/api/v1/w/{workspace}/events?from={from}&to={to}&calendar={calendar}",
+  "headers": {
+    "Authorization": "Bearer $OCTAWEAVE_API_KEY"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "Workspace slug or uuid. An API key is pinned to ONE workspace \u2014 call octaweave_whoami and use actor.workspace_id. A wrong workspace is a 403, not a 404."
+      },
+      "from": {
+        "type": "string",
+        "description": "Window start, RFC-3339."
+      },
+      "to": {
+        "type": "string",
+        "description": "Window end, RFC-3339."
+      },
+      "calendar": {
+        "type": "string",
+        "description": "Optional calendar id or slug to restrict to."
+      }
+    },
+    "required": [
+      "workspace"
+    ]
+  },
+  "body_mapping": "none"
+}
