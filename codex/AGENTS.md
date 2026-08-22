@@ -55,13 +55,15 @@ posts add `next_cursor`.
 All paths prefixed `/api/v1`. `{ws}` is the workspace from `whoami`.
 
 **Notes** — markdown is the source of truth; `[[slug]]` links between notes are tracked.
+Search covers notes, posts, and cards only — events and drive files are not indexed, so
+list those modules directly rather than reading an empty result as "nothing there".
 ```
 GET    /w/{ws}/notes                 ?label= &sort=updated|accessed &limit= &cursor=
 POST   /w/{ws}/notes                 {title?, body?, slug?, labels?}
 GET    /w/{ws}/notes/{note}          id or slug; returns body, html, backlinks, broken_links
 PATCH  /w/{ws}/notes/{note}          {base_version?, title?, body?, slug?, labels?}
 DELETE /w/{ws}/notes/{note}
-GET    /w/{ws}/search                ?q= &type=note|post|card|event|file &limit=
+GET    /w/{ws}/search                ?q= &type=note|post|card &limit=
 ```
 
 **Board** — position is relative, never an index.

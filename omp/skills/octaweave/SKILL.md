@@ -65,9 +65,10 @@ retry doesn't double-charge, and don't generate images the user didn't ask for.
 markdown; `[[slug]]` links to another note and the server tracks the backlink. Labels
 are names — passing one that doesn't exist creates it.
 
-**Find something.** `GET /api/v1/w/{ws}/search?q=…` searches the whole workspace; add
-`&type=note` (or `post`, `card`, `event`, `file`) to narrow it. This is almost always
-better than listing and filtering client-side.
+**Find something.** `GET /api/v1/w/{ws}/search?q=…` is full-text over notes, posts, and
+cards; add `&type=note` (or `post`, `card`) to narrow it. Better than listing and
+filtering client-side — but calendar events and drive files are not indexed, so list
+those modules directly rather than reading an empty result as "nothing there".
 
 **Move a card.** `PATCH /api/v1/w/{ws}/cards/{id}`. `{"column":"Done"}` moves it,
 `{"completed":true}` completes it. Position is relative, never an index: `after` absent

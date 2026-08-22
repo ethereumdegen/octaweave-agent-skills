@@ -159,9 +159,13 @@ creates it. Slugs are derived from the title when you omit one.
 
 ### Search
 
-`GET /api/v1/w/{ws}/search?q=…&type=…&limit=20` — full-text across the workspace.
-`type` narrows to one kind of item (`note`, `post`, `card`, `event`, `file`); omit it to
-search everything. Returns `{"items": [...]}`. Needs the `search` module scope.
+`GET /api/v1/w/{ws}/search?q=…&type=…&limit=20` — full-text over **notes, posts, and
+cards**. `type` narrows to one of those three; omit it for all three. Returns
+`{"items": [...]}`. Needs the `search` module scope.
+
+Calendar events and drive files are **not** in the index — nothing writes them to it.
+List those modules directly (`/events?from=&to=`, `/folders/{id}/contents`) instead of
+concluding from an empty result that they don't exist.
 
 ### Favorites
 

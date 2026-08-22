@@ -1,6 +1,6 @@
 {
   "name": "octaweave_search",
-  "description": "Full-text search across the whole workspace \u2014 notes, posts, cards, events, and file names. Returns {items}. Prefer this over listing a module and filtering yourself. Narrow with `type` when you know what kind of thing you want.",
+  "description": "Full-text search over the workspace's notes, posts, and kanban cards. Returns {items}. Prefer this over listing a module and filtering yourself. Narrow with `type` when you know which of the three you want. NOTE: calendar events and drive files are NOT indexed \u2014 use octaweave_list_events and octaweave_list_folder for those; an empty result here does not mean they do not exist.",
   "method": "GET",
   "url": "https://octaweave.com/api/v1/w/{workspace}/search?q={q}&type={type}&limit={limit}",
   "headers": {
@@ -19,7 +19,7 @@
       },
       "type": {
         "type": "string",
-        "description": "Optional: note | post | card | event | file. Omit to search everything."
+        "description": "Optional: note | post | card. Omit to search all three."
       },
       "limit": {
         "type": "integer",

@@ -56,8 +56,11 @@ card never collides with someone else's edit — but still pass it when you chan
 - **`octaweave_create_note`** / **`octaweave_update_note`** — `body` is markdown.
   `[[some-slug]]` links to another note and the server tracks the backlink for you.
   `labels` are **names**, and a name that does not exist yet is created.
-- **`octaweave_search`** — full text across notes, posts, cards, events, and file names.
-  Reach for this before listing a module and filtering yourself. `type` narrows it.
+- **`octaweave_search`** — full text over notes, posts, and cards. Reach for this before
+  listing a module and filtering yourself. `type` narrows it to one of the three.
+  Calendar events and drive files are **not** indexed — use `octaweave_list_events` and
+  `octaweave_list_folder` for those rather than reading an empty search result as
+  "nothing there".
 
 `octaweave_delete_note` is permanent. There is no trash for notes and no undo. Confirm
 with the user before deleting anything you did not create in this session.

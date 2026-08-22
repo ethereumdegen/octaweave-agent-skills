@@ -1,6 +1,6 @@
 {
   "name": "octaweave_create_board",
-  "description": "Create a kanban board. Omit `columns` for the usual three (To do / Doing / Done); pass an empty array for a board with no columns.",
+  "description": "Create a kanban board. Omit `columns` for the default three (To do / In progress / Done); pass an empty array for a board with no columns.",
   "method": "POST",
   "url": "https://octaweave.com/api/v1/w/{workspace}/boards",
   "headers": {
